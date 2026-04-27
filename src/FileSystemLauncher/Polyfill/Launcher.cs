@@ -35,7 +35,7 @@ internal static class Launcher
             target = uri.IsAbsoluteUri ? uri.AbsoluteUri : uri.ToString();
         }
 
-        nint result = ShellExecuteW(IntPtr.Zero, "open", target, null, null, SW_SHOWNORMAL);
+        nint result = ShellExecuteW(IntPtr.Zero, "open", target, null!, null!, SW_SHOWNORMAL);
         return result > 32;
     }
 }
