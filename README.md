@@ -1,3 +1,5 @@
+[![NuGet](https://img.shields.io/nuget/v/FileSystemLauncher.svg)](https://nuget.org/packages/FileSystemLauncher) [![Actions](https://github.com/emako/FileSystemLauncher/actions/workflows/library.nuget.yml/badge.svg)](https://github.com/emako/FileSystemLauncher/actions/workflows/library.nuget.yml) 
+
 # FileSystemLauncher
 
 Cross-platform helpers to open files and folders in the user's file manager (Explorer, Finder, or the desktop environment's file browser).
