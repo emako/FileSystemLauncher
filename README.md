@@ -28,7 +28,7 @@ The implementation prefers the native shell launch APIs and provides robust fall
 Example (synchronous):
 
 ```csharp
-using FileSystemLauncher;
+using System.FileSystem;
 
 // Open a folder or file path synchronously
 FileSystemLauncher.Open(@"C:\Temp\My Folder");
@@ -40,7 +40,7 @@ FileSystemLauncher.OpenFolderAndSelectItem(@"C:\Temp\file.txt");
 Example (async):
 
 ```csharp
-using FileSystemLauncher;
+using System.FileSystem;
 using System.Threading.Tasks;
 
 await FileSystemLauncher.OpenAsync(@"C:\Temp\My Folder");
