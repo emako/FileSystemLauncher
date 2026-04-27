@@ -4,19 +4,15 @@ using FileSystemLauncher.Polyfill;
 
 namespace FileSystemLauncher;
 
-public class ShellService : IShellService
+public class FileSystemLauncher : IShellService
 {
     private readonly IProcessRunner _processRunner;
     private readonly IPlatformInfo _platformInfo;
 
-    public ShellService(IProcessRunner processRunner, IPlatformInfo platformInfo)
+    public FileSystemLauncher()
     {
-        _processRunner = processRunner ?? throw new ArgumentNullException(nameof(processRunner));
-        _platformInfo = platformInfo ?? throw new ArgumentNullException(nameof(platformInfo));
-    }
-
-    public ShellService() : this(new SystemProcessRunner(), new PlatformInfo())
-    {
+        _processRunner = new SystemProcessRunner();
+        _platformInfo = new PlatformInfo();
     }
 
     public void OpenFolder(string path)
@@ -25,9 +21,24 @@ public class ShellService : IShellService
 
         if (_platformInfo.IsWindows)
         {
-            var fullPath = path;
+            string fullPath = path;
             if (!Path.IsPathRooted(fullPath)) fullPath = Path.GetFullPath(fullPath);
-            Launcher.LaunchUri(new Uri(fullPath));
+
+            bool launched;
+
+            try
+            {
+                launched = Launcher.LaunchUri(new Uri(fullPath));
+            }
+            catch
+            {
+                launched = false;
+            }
+
+            if (!launched)
+            {
+                _processRunner.Start("explorer.exe", $"\"{fullPath}\"");
+            }
         }
         else if (_platformInfo.IsMacOS)
         {
