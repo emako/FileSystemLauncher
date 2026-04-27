@@ -2,42 +2,40 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace FileSystemLauncher.Polyfill
+namespace FileSystemLauncher.Polyfill;
+
+internal static class Launcher
 {
-    public static class Launcher
+    private const int SW_SHOWNORMAL = 1;
+
+    [DllImport("shell32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    private static extern nint ShellExecuteW(nint hwnd, string lpOperation, string lpFile, string lpParameters, string lpDirectory, int nShowCmd);
+
+    public static Task<bool> LaunchUriAsync(Uri uri)
     {
-        private const int SW_SHOWNORMAL = 1;
+        return Task.FromResult(LaunchUri(uri));
+    }
 
-        [DllImport("shell32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern IntPtr ShellExecuteW(IntPtr hwnd, string lpOperation, string lpFile, string lpParameters, string lpDirectory, int nShowCmd);
+    public static bool LaunchUri(Uri uri)
+    {
+        if (uri == null) throw new ArgumentNullException(nameof(uri));
 
-        public static Task<bool> LaunchUriAsync(Uri uri)
+        string target;
+
+        if (uri.IsAbsoluteUri && uri.Scheme == Uri.UriSchemeFile)
         {
-            return Task.FromResult(LaunchUri(uri));
+            target = uri.LocalPath;
+            if (string.IsNullOrEmpty(target))
+            {
+                target = uri.OriginalString;
+            }
+        }
+        else
+        {
+            target = uri.IsAbsoluteUri ? uri.AbsoluteUri : uri.ToString();
         }
 
-        public static bool LaunchUri(Uri uri)
-        {
-            if (uri == null) throw new ArgumentNullException(nameof(uri));
-
-            string target;
-
-            if (uri.IsAbsoluteUri && uri.Scheme == Uri.UriSchemeFile)
-            {
-                target = uri.LocalPath;
-                if (string.IsNullOrEmpty(target))
-                {
-                    target = uri.OriginalString;
-                }
-            }
-            else
-            {
-                target = uri.IsAbsoluteUri ? uri.AbsoluteUri : uri.ToString();
-            }
-
-            IntPtr result = ShellExecuteW(IntPtr.Zero, "open", target, null, null, SW_SHOWNORMAL);
-            long hinst = result.ToInt64();
-            return hinst > 32;
-        }
+        nint result = ShellExecuteW(IntPtr.Zero, "open", target, null, null, SW_SHOWNORMAL);
+        return result > 32;
     }
 }
