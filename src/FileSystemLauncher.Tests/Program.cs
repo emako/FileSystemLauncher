@@ -1,4 +1,4 @@
-namespace FileSystemLauncher.Tests;
+namespace System.FileSystem.Tests;
 
 internal static class Program
 {
@@ -7,7 +7,7 @@ internal static class Program
         Console.WriteLine("FileSystemLauncher.Tests is now a console application.");
 
         ShellServiceTests.OpenFolder_OnWindows_StartsExplorerWithQuotedPath();
-        //ShellServiceTests.OpenFolderAndSelectItem_OnWindows_UsesSelectArg();
+        ShellServiceTests.OpenFolderAndSelectItem_OnWindows_UsesSelectArg();
         return 0;
     }
 }

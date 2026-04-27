@@ -1,8 +1,7 @@
-using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace FileSystemLauncher.Polyfill;
+namespace System.FileSystem.Polyfill;
 
 internal static class Launcher
 {

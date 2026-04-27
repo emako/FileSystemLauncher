@@ -1,11 +1,10 @@
-using FileSystemLauncher.Polyfill;
-using System;
 using System.Diagnostics;
+using System.FileSystem.Polyfill;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace FileSystemLauncher;
+namespace System.FileSystem;
 
 public static class FileSystemLauncher
 {
