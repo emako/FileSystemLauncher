@@ -1,4 +1,6 @@
-[![NuGet](https://img.shields.io/nuget/v/FileSystemLauncher.svg)](https://nuget.org/packages/FileSystemLauncher) [![Actions](https://github.com/emako/FileSystemLauncher/actions/workflows/library.nuget.yml/badge.svg)](https://github.com/emako/FileSystemLauncher/actions/workflows/library.nuget.yml) 
+[![NuGet](https://img.shields.io/nuget/v/FileSystemLauncher.svg)](https://nuget.org/packages/FileSystemLauncher) [![Actions](https://github.com/emako/FileSystemLauncher/actions/workflows/library.nuget.yml/badge.svg)](https://github.com/emako/FileSystemLauncher/actions/workflows/library.nuget.yml) ![Windows](https://img.shields.io/badge/Platform-Windows-0078D4?logo=windows&labelColor=000000)
+![macOS](https://img.shields.io/badge/Platform-macOS-000000?logo=apple&labelColor=000000)
+![Linux](https://img.shields.io/badge/Platform-Linux-FCC624?logo=linux&labelColor=000000)
 
 # FileSystemLauncher
 
