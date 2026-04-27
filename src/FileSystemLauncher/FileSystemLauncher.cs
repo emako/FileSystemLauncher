@@ -9,17 +9,11 @@ namespace FileSystemLauncher;
 
 public static class FileSystemLauncher
 {
-    public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-
-    public static bool IsMacOS => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
-
-    public static bool IsLinux => RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
-
     public static void Open(string path)
     {
         if (string.IsNullOrWhiteSpace(path)) throw new ArgumentException("Path must not be null or whitespace.", nameof(path));
 
-        if (IsWindows)
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             string fullPath = path;
             if (!Path.IsPathRooted(fullPath)) fullPath = Path.GetFullPath(fullPath);
@@ -40,7 +34,7 @@ public static class FileSystemLauncher
                 ProcessStart("explorer.exe", $"\"{fullPath}\"");
             }
         }
-        else if (IsMacOS)
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
         {
             ProcessStart("open", $"\"{path}\"");
         }
@@ -69,7 +63,7 @@ public static class FileSystemLauncher
     {
         if (string.IsNullOrWhiteSpace(path)) throw new ArgumentException("Path must not be null or whitespace.", nameof(path));
 
-        if (IsWindows)
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             ProcessStart("explorer.exe", $"/select,\"{path}\"");
         }
