@@ -21,6 +21,6 @@ public static class ShellServiceTests
 
     public static void OpenFolderAndSelectItem_OnWindows_UsesSelectArg()
     {
-        FileSystemLauncher.OpenFolderAndSelectItem(@"D:\GitHub\FileSystemLauncher\Logo.png");
+        FileSystemLauncher.OpenFolderAndSelectItem(@"C:\Program Files\dotnet\dotnet.exe");
     }
 }
