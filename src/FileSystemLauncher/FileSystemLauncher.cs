@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace FileSystemLauncher;
 
@@ -14,7 +15,7 @@ public static class FileSystemLauncher
 
     public static bool IsLinux => RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
 
-    public static void OpenFolder(string path)
+    public static void Open(string path)
     {
         if (string.IsNullOrWhiteSpace(path)) throw new ArgumentException("Path must not be null or whitespace.", nameof(path));
 
@@ -49,6 +50,21 @@ public static class FileSystemLauncher
         }
     }
 
+    public static async Task OpenAsync(string path)
+    {
+        // TODO
+    }
+
+    public static void OpenFolder(string path)
+    {
+        Open(path);
+    }
+
+    public static async Task OpenFolderAsync(string path)
+    {
+        // TODO
+    }
+
     public static void OpenFolderAndSelectItem(string path)
     {
         if (string.IsNullOrWhiteSpace(path)) throw new ArgumentException("Path must not be null or whitespace.", nameof(path));
@@ -61,6 +77,11 @@ public static class FileSystemLauncher
         {
             throw new NotSupportedException("Select item is only supported on Windows.");
         }
+    }
+
+    public static async Task OpenFolderAndSelectItemAsync(string path)
+    {
+        // TODO
     }
 
     private static void ProcessStart(string fileName, string arguments)
