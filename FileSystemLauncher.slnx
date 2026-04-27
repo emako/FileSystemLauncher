@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FileSystemLauncher.Tests/FileSystemLauncher.Tests.csproj" />
+    <Project Path="src/FileSystemLauncher/FileSystemLauncher.csproj" />
+  </Folder>
+</Solution>
