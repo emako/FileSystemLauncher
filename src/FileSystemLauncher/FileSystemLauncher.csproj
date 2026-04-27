@@ -9,9 +9,9 @@
         <RepositoryUrl>https://github.com/emako/FileSystemLauncher</RepositoryUrl>
         <PackageProjectUrl>https://github.com/emako/FileSystemLauncher</PackageProjectUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageTags>xxxxx</PackageTags>
+        <PackageTags>filesystem;launcher;file-manager;explorer;xdg-open;open;dotnet;cross-platform</PackageTags>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Description>xxxxx</Description>
+        <Description>Cross-platform .NET library to open files and folders in the user's file manager (Explorer, Finder, or desktop file browser). Supports selecting files in Windows Explorer and provides synchronous and asynchronous APIs.</Description>
         <PackageIcon>Logo.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <DebugType>portable</DebugType>
