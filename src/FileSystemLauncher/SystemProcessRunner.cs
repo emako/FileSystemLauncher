@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace ShellApi;
+namespace FileSystemLauncher;
 
 public class SystemProcessRunner : IProcessRunner
 {

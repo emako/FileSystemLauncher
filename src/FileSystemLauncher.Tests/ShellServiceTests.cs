@@ -1,14 +1,16 @@
 using System;
 using Xunit;
 
-namespace ShellApi.Tests;
+namespace FileSystemLauncher.Tests;
 
 public class ShellServiceTests
 {
     private class FakeProcessRunner : IProcessRunner
     {
         public string FileName { get; private set; }
+
         public string Arguments { get; private set; }
+
         public int CallCount { get; private set; }
 
         public void Start(string fileName, string arguments)

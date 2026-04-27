@@ -1,4 +1,4 @@
-namespace ShellApi;
+namespace FileSystemLauncher;
 
 public interface IShellService
 {

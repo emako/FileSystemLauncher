@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace ShellApi;
+namespace FileSystemLauncher;
 
 public class PlatformInfo : IPlatformInfo
 {
