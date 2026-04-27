@@ -1,25 +1,24 @@
-using System;
-using System.IO;
 using FileSystemLauncher.Polyfill;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace FileSystemLauncher;
 
-public class FileSystemLauncher : IShellService
+public static class FileSystemLauncher
 {
-    private readonly IProcessRunner _processRunner;
-    private readonly IPlatformInfo _platformInfo;
+    public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
-    public FileSystemLauncher()
-    {
-        _processRunner = new SystemProcessRunner();
-        _platformInfo = new PlatformInfo();
-    }
+    public static bool IsMacOS => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 
-    public void OpenFolder(string path)
+    public static bool IsLinux => RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+
+    public static void OpenFolder(string path)
     {
         if (string.IsNullOrWhiteSpace(path)) throw new ArgumentException("Path must not be null or whitespace.", nameof(path));
 
-        if (_platformInfo.IsWindows)
+        if (IsWindows)
         {
             string fullPath = path;
             if (!Path.IsPathRooted(fullPath)) fullPath = Path.GetFullPath(fullPath);
@@ -37,30 +36,40 @@ public class FileSystemLauncher : IShellService
 
             if (!launched)
             {
-                _processRunner.Start("explorer.exe", $"\"{fullPath}\"");
+                ProcessStart("explorer.exe", $"\"{fullPath}\"");
             }
         }
-        else if (_platformInfo.IsMacOS)
+        else if (IsMacOS)
         {
-            _processRunner.Start("open", $"\"{path}\"");
+            ProcessStart("open", $"\"{path}\"");
         }
         else
         {
-            _processRunner.Start("xdg-open", $"\"{path}\"");
+            ProcessStart("xdg-open", $"\"{path}\"");
         }
     }
 
-    public void OpenFolderAndSelectItem(string path)
+    public static void OpenFolderAndSelectItem(string path)
     {
         if (string.IsNullOrWhiteSpace(path)) throw new ArgumentException("Path must not be null or whitespace.", nameof(path));
 
-        if (_platformInfo.IsWindows)
+        if (IsWindows)
         {
-            _processRunner.Start("explorer.exe", $"/select,\"{path}\"");
+            ProcessStart("explorer.exe", $"/select,\"{path}\"");
         }
         else
         {
             throw new NotSupportedException("Select item is only supported on Windows.");
         }
+    }
+
+    private static void ProcessStart(string fileName, string arguments)
+    {
+        ProcessStartInfo psi = new(fileName, arguments)
+        {
+            UseShellExecute = true
+        };
+
+        using Process _ = Process.Start(psi);
     }
 }

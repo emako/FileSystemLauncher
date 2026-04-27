@@ -16,13 +16,11 @@ public static class ShellServiceTests
 {
     public static void OpenFolder_OnWindows_StartsExplorerWithQuotedPath()
     {
-        var service = new FileSystemLauncher();
-        service.OpenFolder(@"C:\Program Files");
+        FileSystemLauncher.OpenFolder(@"C:\Program Files");
     }
 
     public static void OpenFolderAndSelectItem_OnWindows_UsesSelectArg()
     {
-        var service = new FileSystemLauncher();
-        service.OpenFolderAndSelectItem(@"D:\GitHub\FileSystemLauncher\Logo.png");
+        FileSystemLauncher.OpenFolderAndSelectItem(@"D:\GitHub\FileSystemLauncher\Logo.png");
     }
 }
